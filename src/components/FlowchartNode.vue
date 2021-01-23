@@ -87,8 +87,8 @@ export default {
   },
   methods: {
     getEvent(e){
-        this.x = e.clientX;
-        this.y = e.clientY;
+        this.mouseX = e.clientX;
+        this.mouseY = e.clientY;
     },
     handleMousedown(e) {
       const target = e.target || e.srcElement;
@@ -99,7 +99,7 @@ export default {
       e.preventDefault();
     },
     detectClick(e){
-      if (this.x === e.clientX || this.y === e.clientY){
+      if (this.mouseX === e.clientX || this.mouseY === e.clientY){
         this.detectMovement = false;
       }
       else {
