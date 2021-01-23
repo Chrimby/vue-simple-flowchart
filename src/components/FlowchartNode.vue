@@ -1,7 +1,7 @@
 <template>
   <div class="flowchart-node" :style="nodeStyle" 
-    @mousedown="handleMousedown"
-    @mouseup="emitClick"
+    @mousedown="handleMousedown,getEvent"
+    @mouseup="detectClick"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
     v-bind:class="{selected: options.selected === id}">
@@ -68,7 +68,10 @@ export default {
     return {
       show: {
         delete: false,
-      }
+      },
+      detectMovement: true,
+      mouseX: 0,
+      mouseY: 0
     }
   },
   mounted() {
@@ -83,6 +86,10 @@ export default {
     }
   },
   methods: {
+    getEvent(e){
+        this.x = e.clientX;
+        this.y = e.clientY;
+    },
     handleMousedown(e) {
       const target = e.target || e.srcElement;
       // console.log(target);
@@ -91,14 +98,21 @@ export default {
       }
       e.preventDefault();
     },
-    emitClick(e){
+    detectClick(e){
+      if (this.x === e.clientX || this.y === e.clientY){
+        this.detectMovement = false;
+      }
+      else {
+        this.detectMovement = true;
+       }
       const target = e.target || e.srcElement;
-      if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0) {
-        this.$emit('nodeMouseUp', e);
+      if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0 && this.detectMovement === false) {
+        this.$emit('nodeSingleClick', e);
       }
       e.preventDefault();
     },
     handleMouseOver() {
+    
       this.show.delete = true;
     },
     handleMouseLeave() {
