@@ -70,8 +70,8 @@ export default {
         delete: false,
       },
       detectMovement: true,
-      mouseX: 0,
-      mouseY: 0
+      mouseX: 1,
+      mouseY: 1
     }
   },
   mounted() {
