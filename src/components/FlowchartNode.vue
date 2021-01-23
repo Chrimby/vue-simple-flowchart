@@ -1,6 +1,6 @@
 <template>
   <div class="flowchart-node" :style="nodeStyle" 
-    @mousedown="handleMousedown,getEvent"
+    @mousedown="handleMousedown"    
     @mouseup="detectClick"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
@@ -86,11 +86,10 @@ export default {
     }
   },
   methods: {
-    getEvent(e){
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
-    },
+   
     handleMousedown(e) {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
       const target = e.target || e.srcElement;
       // console.log(target);
       if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0) {
@@ -101,14 +100,11 @@ export default {
     detectClick(e){
       if (this.mouseX === e.clientX && this.mouseY === e.clientY){
         this.detectMovement = false;
+        this.$emit('nodeSingleClick', e);
       }
       else {
         this.detectMovement = true;
        }
-      const target = e.target || e.srcElement;
-      if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0 && this.detectMovement === false) {
-        this.$emit('nodeSingleClick', e);
-      }
       e.preventDefault();
     },
     handleMouseOver() {
