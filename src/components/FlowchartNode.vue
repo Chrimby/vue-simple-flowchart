@@ -99,7 +99,7 @@ export default {
       e.preventDefault();
     },
     detectClick(e){
-      if (this.mouseX === e.clientX || this.mouseY === e.clientY){
+      if (this.mouseX === e.clientX && this.mouseY === e.clientY){
         this.detectMovement = false;
       }
       else {
