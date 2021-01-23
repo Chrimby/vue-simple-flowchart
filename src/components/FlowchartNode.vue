@@ -1,6 +1,6 @@
 <template>
   <div class="flowchart-node" :style="nodeStyle" 
-    @mousedown="handleMousedown"
+    @mouseup="handleMousedown"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
     v-bind:class="{selected: options.selected === id}">
