@@ -13,6 +13,7 @@
     <flowchart-node v-bind.sync="node" 
       v-for="(node, index) in scene.nodes" 
       :key="`node${index}`"
+      :v-on="$listeners"
       :options="nodeOptions"
       @linkingStart="linkingStart(node.id)"
       @linkingStop="linkingStop(node.id)"
