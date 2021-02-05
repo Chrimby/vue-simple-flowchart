@@ -1,7 +1,7 @@
 <template>
   <div class="flowchart-node" :style="nodeStyle" 
     @mousedown="handleMousedown"    
-    @mouseup="detectClick"
+    @mouseup="detectClick($event, id)"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
     v-bind:class="{selected: options.selected === id}">
@@ -11,13 +11,14 @@
     </div>
     <div class="node-main">
       <div v-text="type" class="node-type"></div>
-      <div v-text="label" class="node-label"></div>
+  <div v-text="label" class="node-label"></div>
     </div>
     <div class="node-port node-output" 
       @mousedown="outputMouseDown">
     </div>
     <div v-show="show.delete" class="node-delete">&times;</div>
   </div>
+ 
 </template>
 
 <script>
@@ -25,10 +26,10 @@ export default {
   name: 'FlowchartNode',
   props: {
     id: {
-      type: Number,
-      default: 1000,
+      type: String,
+      default: '61bab7c.d722d55',
       validator(val) {
-        return typeof val === 'number'
+        return typeof val === 'string'
       }
     },
     x: {
@@ -144,6 +145,7 @@ $portSize: 12;
   background: white;
   z-index: 1;
   opacity: .9;
+  border-radius:8px;
   cursor: move;
   transform-origin: top left;
   .node-main {
@@ -198,6 +200,6 @@ $portSize: 12;
   }
 }
 .selected {
-  box-shadow: 0 0 0 2px $themeColor;
+  box-shadow: 0 0 0 2px #5996c5;
 }
 </style>

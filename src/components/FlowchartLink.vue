@@ -32,7 +32,7 @@ export default {
         return [0, 0]
       }
     },
-    id: Number,
+    id: String,
   },
   data() {
     return {
@@ -69,14 +69,14 @@ export default {
   computed: {
     pathStyle() {
       return {
-        stroke: 'rgb(255, 136, 85)',
+        stroke: 'rgb(89, 150, 197)',
         strokeWidth: 2.73205,
         fill: 'none',
       }
     },
     arrowStyle() {
       return {
-        stroke: 'rgb(255, 136, 85)',
+        stroke: 'rgb(89, 150, 197)',
         strokeWidth: 5.73205,
         fill: 'none',
       }

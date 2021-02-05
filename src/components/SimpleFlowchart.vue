@@ -13,11 +13,12 @@
     <flowchart-node v-bind.sync="node" 
       v-for="(node, index) in scene.nodes" 
       :key="`node${index}`"
-      :v-on="$listeners"
+      @nodeSingleClick="emitClick(node.id)"
       :options="nodeOptions"
       @linkingStart="linkingStart(node.id)"
       @linkingStop="linkingStop(node.id)"
-      @nodeSelected="nodeSelected(node.id, $event)">
+      @nodeSelected="nodeSelected(node.id, $event)"
+      >
     </flowchart-node>
   </div>
 </template>
@@ -30,6 +31,7 @@ import { getMousePosition } from '../assets/utilty/position';
 export default {
   name: 'VueFlowchart',
   props: {
+    nodealias: String,
     scene: {
       type: Object,
       default() {
@@ -121,6 +123,10 @@ export default {
     // console.log(22222, this.rootDivOffset);
   },
   methods: {
+    emitClick(id){
+      this.$emit('nodeViewConfig', id);
+      console.log(id);
+    },
     findNodeWithID(id) {
       return this.scene.nodes.find((item) => {
           return id === item.id
