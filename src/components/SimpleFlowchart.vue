@@ -17,8 +17,7 @@
       :options="nodeOptions"
       @linkingStart="linkingStart(node.id)"
       @linkingStop="linkingStop(node.id)"
-      @nodeSelected="nodeSelected(node.id, $event)"
-      >
+      @nodeSelected="nodeSelected(node.id, $event)">
     </flowchart-node>
   </div>
 </template>
@@ -31,7 +30,6 @@ import { getMousePosition } from '../assets/utilty/position';
 export default {
   name: 'VueFlowchart',
   props: {
-    nodealias: String,
     scene: {
       type: Object,
       default() {
@@ -125,7 +123,7 @@ export default {
   methods: {
     emitClick(id){
       this.$emit('nodeViewConfig', id);
-      console.log(id);
+      
     },
     findNodeWithID(id) {
       return this.scene.nodes.find((item) => {
@@ -141,6 +139,7 @@ export default {
       }
     },
     linkingStart(index) {
+    
       this.action.linking = true;
       this.draggingLink = {
         from: index,
@@ -155,12 +154,9 @@ export default {
         const existed = this.scene.links.find((link) => {
           return link.from === this.draggingLink.from && link.to === index;
         })
-        if (!existed) {
-          let maxID = Math.max(0, ...this.scene.links.map((link) => {
-            return link.id
-          }))
+        if (!existed) {          
           const newLink = {
-            id: maxID + 1,
+            id: this.generateID(),
             from: this.draggingLink.from,
             to: index,
           };
@@ -261,7 +257,12 @@ export default {
         return link.from !== id && link.to !== id
       })
       this.$emit('nodeDelete', id)
-    }
+    },
+    generateID() {
+      var id = Math.random();
+      id.toString(36);
+      return id.toString(36).substr(2, 14);
+    },
   },
 }
 </script>
