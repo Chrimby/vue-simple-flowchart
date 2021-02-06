@@ -126,6 +126,7 @@ export default {
       this.$emit('linkingStop')
       e.preventDefault();
     },
+    
   }
 }
 </script>
