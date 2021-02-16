@@ -4,14 +4,15 @@
     @mouseup="detectClick($event, id)"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
-    v-bind:class="{selected: options.selected === id}">
+    v-bind:class="{selected: options.selected === id}"
+    >
     <div class="node-port node-input"
        @mousedown="inputMouseDown"
        @mouseup="inputMouseUp">
     </div>
     <div class="node-main">
       <div v-text="type" class="node-type"></div>
-  <div v-text="label" class="node-label"></div>
+    <!--div v-text="label" class="node-label"></div-->
     </div>
     <div class="node-port node-output" 
       @mousedown="outputMouseDown">
@@ -138,12 +139,14 @@ $portSize: 12;
 
 .flowchart-node {
   margin: 0;
-  width: 95px;
-  height: 50px;
+  width: 150px;
+  height: 60px;
+  text-align: center;
+  color: white;
   position: absolute;
   box-sizing: border-box;
   border: none;
-  background: white;
+  background: #369bc7;;
   z-index: 1;
   opacity: .9;
   border-radius:8px;
@@ -152,10 +155,11 @@ $portSize: 12;
   .node-main {
     text-align: center;
     .node-type {
-      background: $themeColor;
       color: white;
       font-size: 13px;
       padding: 6px;
+      vertical-align: middle;
+      line-height: 50px;
     }
     .node-label {
       font-size: 13px;
@@ -167,7 +171,7 @@ $portSize: 12;
     height: #{$portSize}px;
     transform: translate(-50%);
     border: 1px solid #ccc;
-    top: 34%;
+    top: 39%;
     border-radius: 100px;
     background: white;
     &:hover {

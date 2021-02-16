@@ -132,10 +132,10 @@ export default {
     },
     getPortPosition(type, x, y) {
       if (type === 'top') {
-        return [x , y + 25];
+        return [x , y + 30];
       }
       else if (type === 'left') {
-        return [x + 95, y + 25];
+        return [x + 150, y + 30];
       }
     },
     linkingStart(index) {
