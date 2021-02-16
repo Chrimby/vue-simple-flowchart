@@ -133,13 +133,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$themeColor: rgb(255, 136, 85);
+$themeColor: rgb(54,155,199);
 $portSize: 12;
 
 .flowchart-node {
   margin: 0;
-  width: 80px;
-  height: 80px;
+  width: 95px;
+  height: 50px;
   position: absolute;
   box-sizing: border-box;
   border: none;
@@ -165,9 +165,9 @@ $portSize: 12;
     position: absolute;
     width: #{$portSize}px;
     height: #{$portSize}px;
-    left: 50%;
     transform: translate(-50%);
     border: 1px solid #ccc;
+    top: 34%;
     border-radius: 100px;
     background: white;
     &:hover {
@@ -176,10 +176,11 @@ $portSize: 12;
     }
   }
   .node-input {
-    top: #{-2+$portSize/-2}px;
+    left: 0%;
   }
   .node-output {
     bottom: #{-2+$portSize/-2}px;
+    left: 100%;
   }
   .node-delete {
     position: absolute;
