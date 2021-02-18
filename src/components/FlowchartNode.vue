@@ -11,7 +11,7 @@
        @mouseup="inputMouseUp">
     </div>
     <div class="node-main">
-      <div v-text="type" class="node-type"></div>
+      <div v-text="$attrs.configuration.name" class="node-type"></div>
     <!--div v-text="label" class="node-label"></div-->
     </div>
     <div class="node-port node-output" 
