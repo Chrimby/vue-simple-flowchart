@@ -6,6 +6,9 @@
     @mouseleave="handleMouseLeave"
     v-bind:class="{selected: options.selected === id}"
     >
+    <div v-if="$attrs.status != 'ok' " class="status_icon">
+      <img :src="'/img/' + $attrs.status +'.png'" width="20px" />
+    </div>
     <div class="node-port node-input"
        @mousedown="inputMouseDown"
        @mouseup="inputMouseUp">
@@ -207,5 +210,11 @@ $portSize: 12;
 }
 .selected {
   box-shadow: 0 0 0 2px #5996c5;
+}
+
+.status_icon {
+  top: -13px;
+  position: absolute;
+  right: 10px;
 }
 </style>
