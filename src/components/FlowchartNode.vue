@@ -87,6 +87,7 @@ export default {
         top: this.options.centerY + this.y * this.options.scale + 'px', // remove: this.options.offsetTop + 
         left: this.options.centerX + this.x * this.options.scale + 'px', // remove: this.options.offsetLeft + 
         transform: `scale(${this.options.scale})`,
+        "--theme-color": this.$attrs.color || "rgb(54,155,199)"
       }
     }
   },
@@ -137,7 +138,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$themeColor: rgb(54,155,199);
+$themeColor: var(--theme-color);
 $portSize: 12;
 
 .flowchart-node {
@@ -149,7 +150,7 @@ $portSize: 12;
   position: absolute;
   box-sizing: border-box;
   border: none;
-  background: #369bc7;;
+  background: $themeColor;;
   z-index: 1;
   opacity: .9;
   border-radius:8px;
@@ -209,7 +210,7 @@ $portSize: 12;
   }
 }
 .selected {
-  box-shadow: 0 0 0 2px #5996c5;
+  box-shadow: 0 0 0 2px $themeColor;
 }
 
 .status_icon {
