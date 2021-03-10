@@ -15,6 +15,9 @@
       :key="`node${index}`"
       @nodeSingleClick="emitClick(node.id)"
       :options="nodeOptions"
+      :popover="node.exec.active"
+      :state="node.exec.state"
+      :content="node.exec.content"
       @linkingStart="linkingStart(node.id)"
       @linkingStop="linkingStop(node.id)"
       @nodeSelected="nodeSelected(node.id, $event)">

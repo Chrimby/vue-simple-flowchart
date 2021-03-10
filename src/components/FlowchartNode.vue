@@ -21,7 +21,41 @@
       @mousedown="outputMouseDown">
     </div>
     <div v-show="show.delete" class="node-delete">&times;</div>
+    <el-popover
+      style="margin: 10px 0 0 0;"
+      placement="bottom-end"
+      :width="width"
+      trigger="manual"
+      v-model="popover">
+      <el-row :gutter="20" type="flex" align="middle">
+        <el-col :span="6">
+          <el-badge :value="count" class="item">
+             <i v-if="state === 'loading'" class=" custom-icon el-icon-loading"></i>
+              <i v-if="state === 'ok'" class="custom-icon el-icon-check"></i>
+             <i v-if="state === 'warning'" class=" custom-icon el-icon-warning"></i>
+          </el-badge>
+        </el-col>
+        <el-col :span="16">
+            <template v-if="content && content.type == 'string'">{{content.value}}</template>
+            <template v-if="content && content.type == 'tags'" v-for="val in content.value" :key="val.name">
+              <div> <span>{{val.name}}</span>: <span style="float:right; ">{{val.value}}</span></div>
+            </template>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <template  v-if="content && content.type == 'table'">
+            <el-table :data="content.value" size="mini">
+                <el-table-column property="date" label="Date" ></el-table-column>
+                <el-table-column property="temp" label="Temp" ></el-table-column>
+                <el-table-column property="humidity" label="Humidity"></el-table-column>
+                <el-table-column property="status" label="Status" ></el-table-column>
+            </el-table>
+        </template>
+      </el-row>
+
+    </el-popover>
   </div>
+  
  
 </template>
 
@@ -67,6 +101,27 @@ export default {
           centerY: 140,
         }
       }
+    },
+    popover: {
+      type: Boolean,
+      default: false
+    },
+    state: {
+      type: String,
+      default: "loading"
+    },
+    content: {
+      type: Object,
+      default: {}
+    }
+
+  },
+  watch: {
+    content(newV, oldV){
+      this.count++;
+      if(newV.type == "table") {
+        this.width = 320;
+      }
     }
   },
   data() {
@@ -76,7 +131,10 @@ export default {
       },
       detectMovement: true,
       mouseX: 1,
-      mouseY: 1
+      mouseY: 1,
+      loading: false,
+      count: 0,
+      width: 200
     }
   },
   mounted() {
@@ -140,6 +198,15 @@ export default {
 <style scoped lang="scss">
 $themeColor: var(--theme-color);
 $portSize: 12;
+
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+
+.custom-icon {
+   font-size: 1.5rem;
+}
 
 .flowchart-node {
   margin: 0;
