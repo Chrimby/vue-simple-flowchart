@@ -16,6 +16,7 @@
   "dependencies": {
     "vue": "^2.5.17"
   },
+  "types": "index.d.ts",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
